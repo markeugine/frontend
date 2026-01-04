@@ -49,6 +49,9 @@ const PROCESS_STATUS_ITEMS = [
   { value: 'done', label: 'Done' },
 ];
 
+// ✅ Define fitting completion threshold
+const FITTING_COMPLETION_STATUSES = ['fitting', 'alterations', 'final_fitting', 'ready', 'picked_up', 'done'];
+
 function AddUpdateModal({ onClose, projectId, onSuccess }) {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -130,9 +133,21 @@ function AddUpdateModal({ onClose, projectId, onSuccess }) {
 
     return PROCESS_STATUS_ITEMS.map((item) => {
       const itemIndex = STATUS_ORDER.indexOf(item.value);
+      let disabled = itemIndex < currentIndex; // disables *all* earlier statuses
+
+      // ✅ Additional validation: Cannot move to "picked_up" or "done" if:
+      // 1. There is still a balance remaining, OR
+      // 2. Fitting has not been completed
+      if ((item.value === 'picked_up' || item.value === 'done') && !disabled) {
+        const fittingCompleted = FITTING_COMPLETION_STATUSES.includes(currentStatus);
+        if (projectBalance > 0 || !fittingCompleted) {
+          disabled = true;
+        }
+      }
+
       return {
         ...item,
-        disabled: itemIndex < currentIndex, // ← disables *all* earlier statuses
+        disabled,
       };
     });
   };
@@ -179,7 +194,7 @@ function AddUpdateModal({ onClose, projectId, onSuccess }) {
     };
   };
 
-  // ✅ Main handler - shows confirmation with balance validation
+  // ✅ Main handler - shows confirmation with balance and fitting validation
   const handleUpdate = (data) => {
     if (saving) return;
 
@@ -202,6 +217,51 @@ function AddUpdateModal({ onClose, projectId, onSuccess }) {
         }
       );
       return;
+    }
+
+    // ✅ Validate: Cannot move to "picked_up" or "done" if balance remains
+    if ((data.process_status === 'picked_up' || data.process_status === 'done') && projectBalance > 0) {
+      toast.error(
+        <div style={{ padding: '8px' }}>
+          Cannot mark as "{data.process_status === 'picked_up' ? 'Picked up' : 'Done'}" while balance remains (₱{projectBalance.toFixed(2)}). Please collect full payment first.
+        </div>,
+        {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "colored",
+          transition: Slide,
+          closeButton: false,
+        }
+      );
+      return;
+    }
+
+    // ✅ Validate: Cannot move to "picked_up" or "done" if fitting is not completed
+    if ((data.process_status === 'picked_up' || data.process_status === 'done')) {
+      const fittingCompleted = FITTING_COMPLETION_STATUSES.includes(currentStatus);
+      if (!fittingCompleted) {
+        toast.error(
+          <div style={{ padding: '8px' }}>
+            Cannot mark as "{data.process_status === 'picked_up' ? 'Picked up' : 'Done'}" until fitting is completed. Current status must reach at least "Fitting" stage.
+          </div>,
+          {
+            position: "top-center",
+            autoClose: 4000,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "colored",
+            transition: Slide,
+            closeButton: false,
+          }
+        );
+        return;
+      }
     }
 
     // ✅ Validate: Payment amount cannot exceed balance

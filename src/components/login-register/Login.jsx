@@ -132,7 +132,7 @@ function Login() {
                             />
                         </div>
 
-                        <Link to='/request-reset-password' className='blue forgot-password'>Forgot password.</Link>
+                        {/* <Link to='/request-reset-password' className='blue forgot-password'>Forgot password.</Link> */}
 
                         <div className="logres-button-container">
 
