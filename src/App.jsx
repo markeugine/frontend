@@ -3,7 +3,8 @@ import './App.css';
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 // Components
-import LandingPage from './components/landing-page/LandingPage';
+// import LandingPage from './components/landing-page/LandingPage';
+import RevisedLandingPage from './components/revised-landing-page/RevisedLandingPage';
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
 import NotFound from './components/not-found/NotFound';
@@ -19,14 +20,14 @@ function App() {
   return (
     <div className='main'>
       <Routes>
-        <Route path="/estrope" element={<LandingPage />} />
+        <Route path="/estrope" element={<RevisedLandingPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/request-reset-password" element={<RequestResetPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         {/* Protected Routes */}
-        <Route element={<ProtectedRoute />}>
+        {/* <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Navigate to={'/user'} />} />
           <Route path="/user/*" element={<Navbar />} />
 
@@ -34,16 +35,16 @@ function App() {
             <Route path="/admin/*" element={<AdminNavbar />} />
             <Route path="/admin" element={<Navigate to={'/admin/dashboard'} />} />
           </Route>
-        </Route>
+        </Route> */}
 
         {/* For development purposes */}
-          {/* <Route path="/" element={<Navigate to={'/user'} />} />
-          <Route path="/user/*" element={<Navbar />} /> */}
+          <Route path="/" element={<Navigate to={'/user'} />} />
+          <Route path="/user/*" element={<Navbar />} />
 
-        {/* <Route element={<AdminRoute />}> */}
-          {/* <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
-          <Route path="/admin/*" element={<AdminNavbar />} /> */}
-        {/* </Route> */}
+        <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
+          <Route path="/admin/*" element={<AdminNavbar />} />
+        </Route>
 
         {/* 404 */}
         <Route path="*" element={<NotFound />} />

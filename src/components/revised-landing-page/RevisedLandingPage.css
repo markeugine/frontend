@@ -1,0 +1,936 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+
+.RevisedLandingPage {
+    color: #3b2a11;
+    
+    background-color: #ebebeb;
+}
+
+/* Navigation Bar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    /* border-bottom: 1px solid rgba(59, 42, 17, 0.1); */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(253, 249, 243, 0.98);
+    box-shadow: 0 2px 20px rgba(59, 42, 17, 0.08);
+}
+
+.navBrand {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Cormorant Garamond", serif;
+    color: #3b2a11;
+    cursor: pointer;
+}
+
+.navLinks {
+    display: flex;
+    gap: 50px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navLink {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3b2a11;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    opacity: 0.8;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #3b2a11;
+    transition: width 0.3s ease;
+}
+
+.navLink:hover {
+    opacity: 1;
+}
+
+.navLink:hover::after {
+    width: 100%;
+}
+
+.navUserIcon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b2a11;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    border-radius: 50%;
+}
+
+.navUserIcon:hover {
+    border-color: #3b2a11;
+    transform: scale(1.1);
+}
+
+.navUserIcon svg {
+    transition: transform 0.3s ease;
+}
+
+.navUserIcon:hover svg {
+    transform: scale(1.05);
+}
+
+.home-page {
+    height: 100vh;
+}
+
+.homeMainImageCon {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    position: absolute;
+    z-index: 0;
+}
+
+.homePageText {
+    z-index: 100;
+}
+
+img.homeMainImage {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    filter: blur(0px);
+    -webkit-filter: blur(3px);
+}
+
+
+.home-info {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #3b2a11;
+}
+
+.home-info h2 {
+    font-size: 200px;
+    letter-spacing: 3px;
+    line-height: 220px;
+    font-family: "Cormorant Garamond", serif;
+}
+
+.animated-text span{
+    position: relative;
+    text-transform: uppercase;
+}
+
+.animated-text span::before{
+    content: "De rigueur";
+}
+
+@keyframes words {
+    0%,20%{
+        content: "Beauty";
+    }
+    21%,40%{
+        content: "Elegance";
+    }
+    41%,60%{
+        content: "Style";
+    }
+    61%,80%{
+        content: "Designs";
+    }
+    81%,100%{
+        content: "Fashion";
+    }
+}
+
+.home-info p {
+    font-size: 14px;
+    opacity: .9;
+    letter-spacing: 3px;
+    width: 40%;
+    text-align: center;
+    line-height: 20px;
+}
+
+.home-info .home-btn {
+    height: 40px;
+    width: 160px;
+    margin-top: 40px;
+    cursor: pointer;
+
+    background-color: transparent;
+    border: 1px solid #3b2a11;
+    color: #3b2a11;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+    z-index: 2;
+}
+
+.home-info .home-btn:hover {
+    box-shadow: rgba(238, 238, 238, 0.2) 0px 7px 29px 0px;
+    background-color: #3b2a11;
+    color: #f5f5f5;
+}
+
+section.services {
+    background-color: #ebebeb;
+    padding-top: 50px;
+}
+
+.servicesTitle {
+    padding-top: 70px; 
+    text-align: center;
+    font-size: 80px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: "Cormorant Garamond", serif;
+}
+
+.servicesMainParagraph {
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: auto;
+    width: 900px;
+    margin-top: 30px;
+    line-height: 26px;
+    margin-bottom: 40px;
+}
+
+.servicesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.servicesContainer .service {
+    height: 70vh;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.servicesContainer .service .serviceImg {
+    object-fit: cover;
+    height: 70%;
+}
+
+.serviceText {
+    height: 70%;
+    padding: 0px 100px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.serviceTextTitle{
+    font-size: 30px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.tailoringFitting .serviceText, 
+.fabricStyle .serviceText {
+    background-color: #0e0b03;
+    color: #fdf9f3;
+}
+
+section.collection {
+    padding-top: 50px;
+}
+
+.collectionTitleContainer {
+    text-align: center;
+}
+
+.collectionTitleContainer .collectionTitle {
+    padding-top: 70px;
+    text-align: center;
+    font-size: 80px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: "Cormorant Garamond", serif;
+}
+
+.collectionMainContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 0px 100px;
+    gap: 20px;
+    margin-top: 70px;
+}
+
+.attireMainContainer {
+    margin-bottom: 20px;
+}
+
+.attireMainContainer .attireMainImageContainer img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.attireNameContainer {
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.attirePrice {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+
+
+
+
+
+/* Add this to your existing RevisedLandingPage.css file */
+
+section.testimonials {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 50px;
+}
+
+.testimonialMainContainer {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 50px;
+}
+
+.testimonialCarousel {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.testimonial {
+    position: absolute;
+    width: 450px;
+    height: 380px;
+    background-color: #fdf9f3;
+    border: 1px solid #3b2a11;
+    padding: 40px 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.testimonial.center {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    z-index: 10;
+    filter: blur(0px);
+}
+
+.testimonial.left {
+    opacity: 0.6;
+    transform: translateX(-480px) scale(0.85);
+    z-index: 5;
+    filter: blur(2px);
+}
+
+.testimonial.right {
+    opacity: 0.6;
+    transform: translateX(480px) scale(0.85);
+    z-index: 5;
+    filter: blur(2px);
+}
+
+.testimonial.hidden {
+    opacity: 0;
+    transform: scale(0.5);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.testimonial:hover {
+    transform: translateX(0) scale(1.02);
+    box-shadow: 0 10px 40px rgba(59, 42, 17, 0.15);
+}
+
+.testimonial.left:hover {
+    transform: translateX(-480px) scale(0.88);
+}
+
+.testimonial.right:hover {
+    transform: translateX(480px) scale(0.88);
+}
+
+.testimonialClientRating {
+    margin-bottom: 20px;
+}
+
+.testimonialClientName {
+    margin-top: 10px;
+}
+
+.tesName {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Cormorant Garamond", serif;
+}
+
+.testimonialClientMessage {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.tesMessage {
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 1.5px;
+    opacity: 0.9;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.testimonialClientTitle {
+    margin-top: 10px;
+}
+
+.tesTitle {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.testimonialDots {
+    display: flex;
+    gap: 15px;
+    margin-top: 60px;
+    z-index: 20;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #3b2a11;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.dot:hover {
+    background-color: rgba(59, 42, 17, 0.5);
+    transform: scale(1.2);
+}
+
+.dot.active {
+    background-color: #3b2a11;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .testimonialCarousel {
+        max-width: 1000px;
+    }
+    
+    .testimonial {
+        width: 380px;
+        height: 400px;
+    }
+    
+    .testimonial.left {
+        transform: translateX(-400px) scale(0.85);
+    }
+    
+    .testimonial.right {
+        transform: translateX(400px) scale(0.85);
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonialCarousel {
+        width: 90%;
+        height: 450px;
+    }
+    
+    .testimonial {
+        width: 90%;
+        height: auto;
+        min-height: 380px;
+        padding: 30px 25px;
+    }
+    
+    .testimonial.left,
+    .testimonial.right {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    section.testimonials {
+        height: auto;
+        padding: 50px 0;
+    }
+}
+
+
+/* Add this to your existing RevisedLandingPage.css file */
+
+section.contact {
+    background-color: #ebebeb;
+    padding: 120px 0;
+}
+
+.contactTitleContainer {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.contactTitle {
+    font-size: 80px;
+    letter-spacing: 3px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: "Cormorant Garamond", serif;
+    margin-bottom: 20px;
+}
+
+.contactSubtitle {
+    font-size: 16px;
+    letter-spacing: 2px;
+    opacity: 0.9;
+}
+
+.contactMainContainer {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    /* background-color: rebeccapurple; */
+}
+
+.contactInfoSection {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.contactInfoItem {
+    border-left: 2px solid #3b2a11;
+    padding-left: 20px;
+}
+
+.contactInfoLabel {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.contactInfoValue {
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    line-height: 26px;
+}
+
+.socialMediaSection {
+    margin-top: 20px;
+}
+
+.socialMediaLabel {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.socialMediaIcons {
+    display: flex;
+    gap: 20px;
+}
+
+.socialIcon {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #3b2a11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b2a11;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.socialIcon:hover {
+    background-color: #3b2a11;
+    color: #fdf9f3;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(59, 42, 17, 0.2);
+}
+
+.contactFormSection {
+    background-color: #fdf9f3;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formLabel {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.formInput,
+.formTextarea {
+    padding: 12px 15px;
+    border: 1px solid #3b2a11;
+    background-color: transparent;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: #3b2a11;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+    outline: none;
+    border-color: #3b2a11;
+    box-shadow: 0 0 0 2px rgba(59, 42, 17, 0.1);
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+    color: rgba(59, 42, 17, 0.5);
+}
+
+.formTextarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contactSubmitBtn {
+    height: 50px;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid #3b2a11;
+    color: #3b2a11;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+.contactSubmitBtn:hover {
+    background-color: #3b2a11;
+    color: #fdf9f3;
+    box-shadow: 0 5px 20px rgba(59, 42, 17, 0.2);
+}
+
+
+/* Footer Styles */
+.footer {
+    background-color: #0e0b03;
+    color: #fdf9f3;
+    padding: 80px 0 0 0;
+}
+
+.footerMainContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 100px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(253, 249, 243, 0.2);
+}
+
+.footerSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.footerBrandName {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Cormorant Garamond", serif;
+    margin-bottom: 15px;
+}
+
+.footerBrandDescription {
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+}
+
+.footerSectionTitle {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.footerLinksList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footerLink {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: #fdf9f3;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.footerLink:hover {
+    opacity: 1;
+    padding-left: 5px;
+}
+
+.footerContactList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footerContactItem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.footerContactLabel {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    font-weight: 600;
+}
+
+.footerContactValue {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+}
+
+.footerBottom {
+    background-color: #0a0803;
+    padding: 30px 0;
+}
+
+.footerBottomContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footerCopyright {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    opacity: 0.7;
+}
+
+.footerSocialMedia {
+    display: flex;
+    gap: 15px;
+}
+
+.footerSocialIcon {
+    width: 35px;
+    height: 35px;
+    border: 1px solid rgba(253, 249, 243, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fdf9f3;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.footerSocialIcon:hover {
+    background-color: #fdf9f3;
+    color: #0e0b03;
+    border-color: #fdf9f3;
+    transform: translateY(-3px);
+}
+
+.footerLegalLinks {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.footerLegalLink {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: #fdf9f3;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.footerLegalLink:hover {
+    opacity: 1;
+}
+
+.footerLegalSeparator {
+    opacity: 0.5;
+    font-size: 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .contactMainContainer {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        padding: 0 50px;
+    }
+
+    .contactFormSection {
+        padding: 40px;
+    }
+
+    .footerMainContainer {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        padding: 0 50px 50px 50px;
+    }
+
+    .footerBottomContainer {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contactTitle {
+        font-size: 50px;
+    }
+
+    .contactMainContainer {
+        padding: 0 30px;
+    }
+
+    .contactFormSection {
+        padding: 30px;
+    }
+
+    .socialMediaIcons {
+        gap: 15px;
+    }
+
+    .socialIcon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .footerMainContainer {
+        grid-template-columns: 1fr;
+        padding: 0 30px 40px 30px;
+    }
+
+    .footerBottomContainer {
+        padding: 0 30px;
+    }
+}
