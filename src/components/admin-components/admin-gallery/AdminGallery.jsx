@@ -12,6 +12,7 @@ import ButtonElement from '../../forms/button/ButtonElement';
 import AxiosInstance from '../../API/AxiosInstance';
 import ViewEditModal from './viewing-item/ViewEditModal';
 import ViewModalItem from './viewing-item/ViewModalItem';
+import UserViewImageModal from '../../user-components/display-gallery/view-item-modal/UserViewImageModal'
 
 const AdminGallery = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -74,14 +75,14 @@ const AdminGallery = () => {
     fetchAttires(); 
   };
 
-  const handleOpenView = (attire) => { 
-    setSelectedAttire(attire); 
-    setIsView(true); 
+  const handleOpenView = (attire) => {
+    setSelectedAttire(attire);
+    setIsView(true);
   };
-  const handleCloseView = () => { 
-    setIsView(false); 
-    setSelectedAttire(null); 
-    fetchAttires(); 
+
+  const handleCloseView = () => {
+    setSelectedAttire({});
+    setIsView(false);
   };
 
   const handleOpenEdit = (attire) => { 
@@ -200,10 +201,15 @@ const AdminGallery = () => {
       <Dialog open={isView} onClose={handleCloseView} fullWidth maxWidth={false} PaperProps={{
         style: { width: 'auto', maxWidth: '90vw', maxHeight: '90vh', padding: '0px', backgroundColor: 'transparent', boxShadow: 'none' }
       }}>
-        <ViewModalItem 
+        {/* <ViewModalItem 
           onClose={handleCloseView} 
           attire={selectedAttire}
           onOpenEdit={handleOpenEdit}
+        /> */}
+
+        <UserViewImageModal
+          onClose={handleCloseView} 
+          attire={selectedAttire}
         />
       </Dialog>
 

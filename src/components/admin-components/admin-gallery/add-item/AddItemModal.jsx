@@ -190,6 +190,7 @@ function AddItemModal({ onClose }) {
       formData.append('attire_name', data.attire_name);
       formData.append('attire_type', data.attire_type);
       formData.append('attire_description', data.description || '');
+      formData.append('total_price', data.total_price || '');
 
       images.forEach((img, idx) => {
         if (img) formData.append(`image${idx + 1}`, img);
@@ -324,6 +325,10 @@ function AddItemModal({ onClose }) {
 
           <div className="description-add-item-container">
             <NormalTextField control={control} name="description" label="Description" />
+          </div>
+
+          <div className="description-add-item-container">
+            <NormalTextField control={control} name="total_price" label="Price" />
           </div>
 
           <div className="images-add-item-contianer">

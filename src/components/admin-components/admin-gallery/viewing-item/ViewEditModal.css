@@ -30,7 +30,7 @@
 
 .name-type-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 1fr; 
     gap: 10px;
 }
 
@@ -58,8 +58,8 @@
 
 .to-display-toggle-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: end;
 }
 
 .EditItemModal .to-display-text {

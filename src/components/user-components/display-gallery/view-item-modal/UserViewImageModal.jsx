@@ -40,8 +40,23 @@ function UserViewImageModal({ onClose, attire }) {
             onClick={() => openFullscreen(userImages[0])}
           />
         </div>
+      </div>
 
-        {/* SUB IMAGES */}
+      {/* TEXT CONTENT */}
+      <div className="userview-item-text">
+        <div className="userview-item-name">
+          {attire?.attire_name || 'Attire Name'}
+        </div>
+
+        <div className="userview-price">
+          ₱ {Number(attire.total_price).toLocaleString()}
+        </div>
+
+        <div className="userview-item-description">
+          {attire?.attire_description}
+        </div>
+        
+
         <div className="userview-sub-image-container">
           {userImages.slice(1).map((img, idx) => (
             <div key={idx} className="userview-sub-image">
@@ -53,17 +68,6 @@ function UserViewImageModal({ onClose, attire }) {
               />
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* TEXT CONTENT */}
-      <div className="userview-item-text">
-        <div className="userview-item-name">
-          {attire?.attire_name || 'Attire Name'}
-        </div>
-
-        <div className="userview-item-description">
-          {attire?.attire_description}
         </div>
       </div>
 

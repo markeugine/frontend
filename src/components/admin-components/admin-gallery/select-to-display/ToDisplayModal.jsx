@@ -64,6 +64,15 @@ function ToDisplayModal({ onClose }) {
     setFilteredAttires(updatedAttires);
   };
 
+  // Toggle display text
+  const handleToggleLanding = (id) => {
+    const updatedAttires = attires.map((attire) =>
+      attire.id === id ? { ...attire, landing_page: !attire.landing_page } : attire
+    );
+    setAttires(updatedAttires);
+    setFilteredAttires(updatedAttires);
+  };
+
   // ✅ Returns config object for confirmation
   const getConfirmationConfig = () => {
     const displayCount = attires.filter(a => a.to_show).length;
@@ -89,7 +98,10 @@ function ToDisplayModal({ onClose }) {
 
     try {
       const updatePromises = attires.map((attire) =>
-        AxiosInstance.patch(`/gallery/admin/attire/${attire.id}/`, { to_show: attire.to_show })
+        AxiosInstance.patch(`/gallery/admin/attire/${attire.id}/`, {   
+          to_show: attire.to_show,
+          landing_page: attire.landing_page,
+        })
       );
       await Promise.all(updatePromises);
 
@@ -224,7 +236,7 @@ function ToDisplayModal({ onClose }) {
                 '& .MuiInputLabel-root.Mui-focused': { color: '#0C0C0C', fontSize: '14px' },
               }}
             />
-
+            
             <div className="to-display-items-container">
               {filteredAttires.length > 0 ? (
                 filteredAttires.map((attire) => (
@@ -238,18 +250,34 @@ function ToDisplayModal({ onClose }) {
                       </div>
                     </div>
 
-                    <div
-                      className={`to-display-text ${attire.to_show ? 'display' : 'not-display'}`}
-                      onClick={() => !saving && handleToggle(attire.id)}
-                      style={{
-                        cursor: saving ? 'not-allowed' : 'pointer',
-                        color: attire.to_show ? 'green' : 'red',
-                        fontWeight: 'bold',
-                        opacity: saving ? 0.5 : 1,
-                      }}
-                    >
-                      {attire.to_show ? 'Display' : 'Not Display'}
+                    <div className="to-display-button">
+                      <div
+                        className={`to-display-text ${attire.to_show ? 'display' : 'not-display'}`}
+                        onClick={() => !saving && handleToggle(attire.id)}
+                        style={{
+                          cursor: saving ? 'not-allowed' : 'pointer',
+                          color: attire.to_show ? 'green' : 'red',
+                          fontWeight: 'bold',
+                          opacity: saving ? 0.5 : 1,
+                        }}
+                      >
+                        {attire.to_show ? 'Gallery' : 'Gallery'}
+                      </div>
+
+                      <div
+                        className={`to-display-text ${attire.landing_page ? 'display' : 'not-display'}`}
+                        onClick={() => !saving && handleToggleLanding(attire.id)}
+                        style={{
+                          cursor: saving ? 'not-allowed' : 'pointer',
+                          color: attire.landing_page ? 'green' : 'red',
+                          fontWeight: 'bold',
+                          opacity: saving ? 0.5 : 1,
+                        }}
+                      >
+                        {attire.landing_page ? 'Landing' : 'Landing'}
+                      </div>
                     </div>
+                    
                   </div>
                 ))
               ) : (

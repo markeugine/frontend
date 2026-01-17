@@ -9,11 +9,55 @@ import fabricStyle from './assets/fabricStyle.png'
 
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
+import { useNavigate, Link } from 'react-router-dom'
+
+import AxiosInstance from '../API/AxiosInstance'
+import UserViewImageModal from '../user-components/display-gallery/view-item-modal/UserViewImageModal'
+import Dialog from '@mui/material/Dialog';
 
 function RevisedLandingPage() {
+  const navigate = useNavigate() 
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [openView, setOpenView] = useState(false);
+  const [selectedAttire, setSelectedAttire] = useState({});
+
+  const [attires, setAttires] = useState([]);
+  const [loadingAttires, setLoadingAttires] = useState(false);
+
+  const fetchLandingAttires = async () => {
+    try {
+      setLoadingAttires(true);
+
+      const response = await AxiosInstance.get('/gallery/attire/');
+      
+      // only show landing page items
+      const landingItems = response.data.filter(
+        attire => attire.landing_page === true
+      );
+
+      setAttires(landingItems);
+    } catch (error) {
+      console.error('Failed to fetch landing attires:', error);
+    } finally {
+      setLoadingAttires(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchLandingAttires();
+  }, []);
+
+  const handleOpenView = (attire) => {
+    setSelectedAttire(attire);
+    setOpenView(true);
+  };
+
+  const handleCloseView = () => {
+    setSelectedAttire({});
+    setOpenView(false);
+  };
 
   const testimonials = [
     {
@@ -97,7 +141,7 @@ function RevisedLandingPage() {
       {/* Navigation Bar */}
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="navBrand" onClick={() => scrollToSection('home')}>
-          De Rigueur
+          Ramil Estrope
         </div>
         <ul className="navLinks">
           <li><a className="navLink" onClick={() => scrollToSection('home')}>Home</a></li>
@@ -123,7 +167,7 @@ function RevisedLandingPage() {
             <h2 className="animated-text"><span></span></h2>
             <p>From fabric to silhouette, every detail tells a story. Explore the artistry behind each piece designed to reflect who you are — bold, beautiful, and unapologetically unique.</p>
 
-            <button className="home-btn" onClick={() => navigate(`/`)}>EXPLORE NOW</button>
+            <button className="home-btn" onClick={() => window.open("/login", "_blank", "noopener,noreferrer")}>EXPLORE NOW</button>
         </div>
       </section>
 
@@ -199,324 +243,41 @@ function RevisedLandingPage() {
 
 
         <div className="collectionMainContainer">
+          {loadingAttires ? (
+            <p className="collection-loading">Loading collection...</p>
+          ) : attires.length > 0 ? (
+            attires.map((attire) => (
+              <div 
+                key={attire.id} 
+                className="attireMainContainer"
+                onClick={() => handleOpenView(attire)}
+              >
+                <div className="attireMainImageContainer">
+                  <img 
+                    src={attire.image1 || noImage} 
+                    alt={attire.attire_name} 
+                  />
+                </div>
 
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
+                <div className="overlay-text">
+                  <div className="attireNameContainer">
+                    {attire.attire_name}
+                  </div>
 
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
-          <div className="attireMainContainer">
-            <div className="attireMainImageContainer">
-              <img src={fabricStyle} alt="" />
-            </div>
-
-            <Stack spacing={1}>
-              <Rating 
-                name="half-rating-read" 
-                defaultValue={3} 
-                precision={0.5} 
-                readOnly 
-                sx={{
-                  '& .MuiRating-icon': {
-                    fontSize: '1.5rem',
-                    color: '#ffb52dff',
-                  }
-                }}
-              />
-            </Stack>
-                
-            <div className="attireNameContainer">
-              De rigueur
-            </div>
-
-            <div className="attirePrice">₱ 10,000.00</div>
-          </div>
+                  {attire.total_price && (
+                    <div className="attirePrice">
+                      ₱ {Number(attire.total_price).toLocaleString()}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="collection-empty">No collection items available.</p>
+          )}
 
         </div>
+        
       </section>
 
       <section className="testimonials" id="testimonials">
@@ -670,7 +431,7 @@ function RevisedLandingPage() {
       <footer className="footer">
         <div className="footerMainContainer">
           <div className="footerSection footerBrand">
-            <h3 className="footerBrandName">De Rigueur</h3>
+            <h3 className="footerBrandName">Ramil Estrope</h3>
             <p className="footerBrandDescription">Crafting timeless elegance through bespoke formalwear. Every stitch tells a story of precision, style, and uncompromising quality.</p>
           </div>
 
@@ -752,7 +513,24 @@ function RevisedLandingPage() {
         </div>
       </footer>
 
-
+      <Dialog
+        open={openView}
+        onClose={handleCloseView}
+        fullWidth
+        maxWidth={false}
+        PaperProps={{
+          style: {
+            width: 'auto',
+            maxWidth: '90vw',
+            maxHeight: '90vh',
+            padding: '0px',
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+          },
+        }}
+      >
+        <UserViewImageModal onClose={handleCloseView} attire={selectedAttire} />
+      </Dialog>
 
     </div>
   )

@@ -291,34 +291,66 @@ section.collection {
 
 .collectionMainContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     padding: 0px 100px;
-    gap: 20px;
-    margin-top: 70px;
+    gap: 8px;
+    margin-top: 20px;
 }
 
 .attireMainContainer {
-    margin-bottom: 20px;
+    position: relative;
 }
 
 .attireMainContainer .attireMainImageContainer img {
-    height: 100%;
+    height: 520px;
     width: 100%;
     object-fit: cover;
 }
 
 .attireNameContainer {
-    font-size: 20px;
     letter-spacing: 1.5px;
     font-weight: 600;
-    margin-top: 5px;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Cormorant Garamond", serif;
 }
 
 .attirePrice {
-    font-size: 14px;
     font-weight: 400;
     margin-top: 5px;
     letter-spacing: 1px;
+    font-size: 22px;
+}
+
+.attireDescrip {
+    text-align: center;
+    width: 80%;
+    letter-spacing: 1px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 0;
+    background-color: #3b2a117d;
+    color: #f5f5f5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: start;
+    opacity: 0;
+    cursor: pointer;
+    transition: all .6s;
+    padding: 20px;
+}
+
+.overlay-text:hover {
+    opacity: 1;
 }
 
 
@@ -879,6 +911,15 @@ section.contact {
 }
 
 /* Responsive adjustments */
+@media (min-width: 1800px) {
+    .collectionMainContainer {
+        grid-template-columns: 1fr 1fr 1fr ;
+    }
+    .attireMainContainer .attireMainImageContainer img {
+        height: 620px;
+    }
+}
+
 @media (max-width: 1024px) {
     .contactMainContainer {
         grid-template-columns: 1fr;

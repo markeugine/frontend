@@ -80,6 +80,10 @@
   gap: 10px;
 }
 
+.to-display-button {
+  display: flex;
+}
+
 .to-display-img-container {
   width: 60px;
   height: 80px;
@@ -114,6 +118,11 @@
   user-select: none;
   transition: all 0.5s ease;
   text-align: center;
+}
+
+.to-display-text.not-display {
+  text-decoration: line-through;
+  font-style: italic;
 }
 
 /* When active (Display) */

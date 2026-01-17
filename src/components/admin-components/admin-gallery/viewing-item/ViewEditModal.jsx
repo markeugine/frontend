@@ -18,6 +18,7 @@ function ViewEditModal({ onClose, attire }) {
   const [images, setImages] = useState([null, null, null, null, null]);
   const [resetTrigger, setResetTrigger] = useState(false);
   const [toShow, setToShow] = useState(false);
+  const [toLanding, setToLanding] = useState(false);
   const [saving, setSaving] = useState(false);
   const [showConfirm, setShowConfirm] = useState(null);
 
@@ -78,8 +79,10 @@ function ViewEditModal({ onClose, attire }) {
     if (attire) {
       setValue('attire_name', attire.attire_name);
       setValue('attire_type', attire.attire_type);
+      setValue('total_price', attire.total_price);
       setValue('description', attire.attire_description || '');
       setToShow(attire.to_show);
+      setToLanding(attire.landing_page);
 
       const preloadedImages = [
         attire.image1 || null,
@@ -225,8 +228,10 @@ function ViewEditModal({ onClose, attire }) {
       const formData = new FormData();
       formData.append('attire_name', data.attire_name);
       formData.append('attire_type', data.attire_type);
+      formData.append('total_price', data.total_price);
       formData.append('attire_description', data.description);
       formData.append('to_show', toShow);
+      formData.append('landing_page', toLanding);
 
       images.forEach((img, idx) => {
         const field = `image${idx + 1}`;
@@ -355,7 +360,6 @@ function ViewEditModal({ onClose, attire }) {
 
           {/* DISPLAY TOGGLE */}
           <div className="to-display-toggle-container">
-            <p>Display on Gallery:</p>
             <div
               className={`to-display-text ${toShow ? 'display' : 'not-display'}`}
               onClick={() => !saving && setToShow(!toShow)}
@@ -364,13 +368,28 @@ function ViewEditModal({ onClose, attire }) {
                 opacity: saving ? 0.5 : 1 
               }}
             >
-              {toShow ? 'Display' : 'Not Display'}
+              {toShow ? 'Gallery' : 'Gallery'}
+            </div>
+
+            <div
+              className={`to-display-text ${toLanding ? 'display' : 'not-display'}`}
+              onClick={() => !saving && setToLanding(!toLanding)}
+              style={{ 
+                cursor: saving ? 'not-allowed' : 'pointer',
+                opacity: saving ? 0.5 : 1 
+              }}
+            >
+              {toLanding ? 'Landing' : 'Landing'}
             </div>
           </div>
 
           <div className="name-type-container">
             <div className="name-edit-item-container">
               <NormalTextField control={control} name="attire_name" label="Name" />
+            </div>
+
+            <div className="price-edit-item-container">
+              <NormalTextField control={control} name="total_price" label="Price" />
             </div>
 
             <div className="type-edit-item-container">

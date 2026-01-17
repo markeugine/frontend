@@ -1,7 +1,7 @@
 .UserViewModalItem {
     background-color: #0c0c0c7b;
     width: 800px;
-    height: 600px;
+    /* height: 600px; */
     border-radius: 12px;
     padding: 20px;
 
@@ -68,7 +68,7 @@
 /* TEXT AREA */
 .userview-item-text {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
     gap: 10px;
     color: var(--white);
 }
@@ -77,6 +77,11 @@
     font-size: 32px;
     font-weight: 600;
     letter-spacing: 2px;
+}
+
+.userview-price {
+    letter-spacing: 1px;
+    font-size: 16px;
 }
 
 .userview-item-description {
